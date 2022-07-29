@@ -970,9 +970,6 @@ select {
 .h-full {
   height: 100%;
 }
-.h-auto {
-  height: auto;
-}
 .h-24 {
   height: 6rem;
 }
@@ -1170,9 +1167,6 @@ select {
 .self-end {
   align-self: flex-end;
 }
-.self-center {
-  align-self: center;
-}
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1272,10 +1266,6 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
-.border-redruby {
-  --tw-border-opacity: 1;
-  border-color: rgb(157 11 40 / var(--tw-border-opacity));
-}
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1338,44 +1328,8 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
-.bg-\[url\(\'\/images\/accord\.png\'\)\] {
-  background-image: url('/images/accord.png');
-}
-.bg-\[url\(\'\/images\/camry\.png\'\)\] {
-  background-image: url('/images/camry.png');
-}
-.bg-\[url\(\'\/images\/c300\.png\'\)\] {
-  background-image: url('/images/c300.png');
-}
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-}
-.bg-\[url\(\'\/images\/crv\.png\'\)\] {
-  background-image: url('/images/crv.png');
-}
-.bg-\[url\(\'\/images\/civic\.png\'\)\] {
-  background-image: url('/images/civic.png');
-}
-.bg-\[url\(\'\/images\/fortuner\.png\'\)\] {
-  background-image: url('/images/fortuner.png');
-}
-.bg-\[url\(\'\/images\/yaris\.png\'\)\] {
-  background-image: url('/images/yaris.png');
-}
-.bg-\[url\(\'\/images\/innova\.png\'\)\] {
-  background-image: url('/images/innova.png');
-}
-.bg-\[url\(\'\/images\/veloz\.png\'\)\] {
-  background-image: url('/images/veloz.png');
-}
-.bg-\[url\(\'\/images\/serena\.png\'\)\] {
-  background-image: url('/images/serena.png');
-}
-.bg-\[url\(\'\/images\/xpander\.png\'\)\] {
-  background-image: url('/images/xpander.png');
-}
-.bg-\[url\(\'\/images\/terios\.png\'\)\] {
-  background-image: url('/images/terios.png');
 }
 .bg-\[url\(\'\/images\/grid\.svg\'\)\] {
   background-image: url('/images/grid.svg');
@@ -1407,17 +1361,6 @@ select {
 .bg-repeat {
   background-repeat: repeat;
 }
-.object-none {
-  -o-object-fit: none;
-     object-fit: none;
-}
-.object-center {
-  -o-object-position: center;
-     object-position: center;
-}
-.p-6 {
-  padding: 1.5rem;
-}
 .p-2 {
   padding: 0.5rem;
 }
@@ -1439,9 +1382,6 @@ select {
 .p-8 {
   padding: 2rem;
 }
-.p-12 {
-  padding: 3rem;
-}
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -1458,13 +1398,13 @@ select {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .py-3 {
   padding-top: 0.75rem;
@@ -1609,13 +1549,13 @@ select {
   --tw-text-opacity: 1;
   color: rgb(157 11 40 / var(--tw-text-opacity));
 }
-.text-primary {
-  --tw-text-opacity: 1;
-  color: rgb(41 98 255 / var(--tw-text-opacity));
-}
 .text-gray-600 {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(41 98 255 / var(--tw-text-opacity));
 }
 .text-gray-900 {
   --tw-text-opacity: 1;
@@ -1625,17 +1565,9 @@ select {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-.text-gray-200 {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
-}
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-.text-gray-300 {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -2084,11 +2016,6 @@ li.sidenav-list a.sidenav-link.active {
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
-.hover\:text-gray-200:hover {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
-}
-
 .hover\:contrast-150:hover {
   --tw-contrast: contrast(1.5);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -2132,11 +2059,6 @@ li.sidenav-list a.sidenav-link.active {
 .active\:text-gray-700:active {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.active\:text-gray-500:active {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .group:hover .group-hover\:scale-110 {
@@ -2358,10 +2280,6 @@ li.sidenav-list a.sidenav-link.active {
 
   .lg\:hidden {
     display: none;
-  }
-
-  .lg\:h-96 {
-    height: 24rem;
   }
 
   .lg\:h-full {

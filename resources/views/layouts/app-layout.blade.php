@@ -8,7 +8,7 @@
         <!-- AlpineJS -->
         <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
         <!-- App CSS -->
-        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Boxicons CSS -->
         <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
         <!-- Swiper JS -->
