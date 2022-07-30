@@ -8,7 +8,7 @@
         <!-- AlpineJS -->
         <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
         <!-- App CSS -->
-        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- AlpineJS -->
         <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
         <!-- Boxicons CSS -->
@@ -24,8 +24,8 @@
         <main class="min-h-screen bg-[url('/images/grid.svg')] bg-center bg-fixed bg-cover">
             {{ $slot }}
         </main>
-        <script src="{{ secure_asset('js/app.js') }}"></script>
-        <script src="{{ secure_asset('js/script.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
     </body>
 
 </html>

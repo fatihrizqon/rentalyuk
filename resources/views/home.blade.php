@@ -9,7 +9,7 @@
                             <x-search date="{{ $date }}" from="" to=""></x-search>
                         </div>
 
-                        <div class="flex flex-col items-center justify-center w-full lg:w-1/2 mt-8 md:mt-0">
+                        <div class="flex flex-col items-center justify-center w-full lg:w-1/2 mt-20 md:mt-0">
                             <div class="swiper w-full select-none">
                                 <div class="swiper-wrapper flex flex-row">
                                     @foreach($vehicles->sortBy('bookings_count')->take(5) as $vehicle)

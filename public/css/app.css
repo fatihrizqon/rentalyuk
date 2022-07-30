@@ -940,6 +940,15 @@ select {
 .-ml-px {
   margin-left: -1px;
 }
+.mt-5 {
+  margin-top: 1.25rem;
+}
+.mt-16 {
+  margin-top: 4rem;
+}
+.mt-20 {
+  margin-top: 5rem;
+}
 .block {
   display: block;
 }

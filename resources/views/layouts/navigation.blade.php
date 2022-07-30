@@ -39,14 +39,6 @@
             <!-- Mobile Navigation -->
             <div x-show="!navigation" class="appereance-none" @scroll.window.throttle="navigation = true"
                 @click.outside="navigation = true" x-transition>
-                @guest
-                <li class="lg:hidden py-2">
-                    <a class="navlink" href="{{ route('login') }}">Login</a>
-                </li>
-                <li class="lg:hidden py-2">
-                    <a class="navlink" href="{{ route('register') }}">Register</a>
-                </li>
-                @else
                 <li class="lg:hidden py-2">
                     <a class="navlink" href="{{ route('/') }}#home">Home</a>
                 </li>
@@ -60,6 +52,14 @@
                     <a class="navlink" href="{{ route('booking') }}">Booking</a>
                 </li>
                 <hr>
+                @guest
+                <li class="lg:hidden py-2">
+                    <a class="navlink" href="{{ route('login') }}">Login</a>
+                </li>
+                <li class="lg:hidden py-2">
+                    <a class="navlink" href="{{ route('register') }}">Register</a>
+                </li>
+                @else
                 <li class="lg:hidden py-2">
                     <a class="navlink" href="{{ route('account') }}">Account
                         Settings</a>

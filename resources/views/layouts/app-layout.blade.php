@@ -69,7 +69,7 @@
                         <form class="grid gap-y-4" action="">
                             @csrf
                             <div class="grid gap-y-2">
-                                <input class="py-2" type="email" name="subsciption" id="subsciption"
+                                <input class="p-2" type="email" name="subsciption" id="subsciption"
                                     placeholder="Enter your email" required>
                                 @error('email')
                                 <span class=" font-medium text-sm text-redfire">{{ $message }}</span>
@@ -127,8 +127,8 @@
                 </div>
             </div>
         </footer>
-        <script src="{{ secure_asset('js/app.js') }}"></script>
-        <script src="{{ secure_asset('js/script.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
     </body>
 
 </html>
