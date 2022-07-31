@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
  
-use App\Models\Vehicle;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
+use App\Models\Vehicle; 
+use Illuminate\Database\Seeder; 
+use Faker\Generator;
 
 class VehicleSeeder extends Seeder
-{ 
-    public function run(Faker $faker)
+{
+    public function run()
     {
+        $faker = app(Generator::class);
         $vehicles = [
             [
                 'license_number' => $faker->numerify('AB1###UZ'),

@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+ 
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Category;
@@ -13,19 +13,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
-    { 
+    {  
         $user = User::create([
             'username'          => 'Admin',
             'name'              => 'Administrator',
             'email'             => 'test@example.com',
             'password'          => Hash::make('123123'),
-            'image'             => 'users/avatar.png',
+            'image'             => 'images/users/avatar.png',
             'phone'             => '+62',
             'address'           => 'System',
             'email_verified_at' => Carbon::now()
