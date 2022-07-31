@@ -19,10 +19,10 @@
                         @endif
 
                         <div class="form-control">
-                            <input class="peer" type="text" name="username" id="username" placeholder="Username"
-                                value="{{ old('username') }}" required>
-                            <label class="form-label" for="username">Username</label>
-                            @error('username')
+                            <input class="peer" type="text" name="email" id="email" placeholder="Email"
+                                value="{{ old('email') }}" required>
+                            <label class="form-label" for="email">Email</label>
+                            @error('email')
                             <span class="font-medium text-sm text-redfire">{{ $message }}</span>
                             @enderror
                         </div>

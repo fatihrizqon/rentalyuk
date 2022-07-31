@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'name'              => 'Administrator',
             'email'             => 'test@example.com',
             'password'          => Hash::make('123123'),
-            'image'             => 'images/users/avatar.png',
+            'image'             => 'users/avatar.png',
             'phone'             => '+62',
             'address'           => 'System',
             'email_verified_at' => Carbon::now()
