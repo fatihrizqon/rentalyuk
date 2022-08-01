@@ -21,7 +21,7 @@
 
     <body>
         <main class="min-h-screen bg-center bg-fixed bg-cover"
-            style="background-image: url('{{asset('/storage/images/grid.svg')}}');">
+            style="background-image: url('{{asset('storage/images/grid.svg')}}');">
             {{ $slot }}
         </main>
         <script src="{{ asset('js/app.js') }}"></script>

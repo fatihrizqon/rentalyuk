@@ -1,5 +1,5 @@
 <div class="flex w-full h-full justify-center shadow-md bg-center bg-fixed select-none"
-    style="background-image: url(/storage/images/sprinkle.svg)">
+    style="background-image: url(storage/images/sprinkle.svg)">
     <div class="grid w-full p-4">
         <div class="p-2">
             <h2 class="font-normal text-3xl text-redfire"><span class="font-bold text-redruby">Easy

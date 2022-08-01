@@ -32,7 +32,7 @@
                         </div>
                     </form>
                     <p class="mt-1 text-xs flex flex-wrap">Format Allowed: CSV, XLS, or XLSX (<a
-                            href="{{ route('/') }}/storage/files/import_vehicles.xlsx"
+                            href="{{ route('/') }}storage/files/import_vehicles.xlsx"
                             class="text-info font-medium hover:text-info/50">Download Format Here</a>).
                     </p>
                     @error('import')
@@ -140,7 +140,7 @@
                                 {{ $vehicle->name }}
                             </td>
                             <td class="text-center">
-                                <!-- <img width="25" src="{{ route('/') }}/storage/{{ $vehicle->image }}"
+                                <!-- <img width="25" src="{{ route('/') }}storage/{{ $vehicle->image }}"
                                     alt="{{ $vehicle->name }} {{ $vehicle->license_number }}"> -->
                             </td>
                             <td class="text-center">

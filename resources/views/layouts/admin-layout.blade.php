@@ -39,7 +39,7 @@
         </header>
 
         <main class="flex flex-row min-h-screen bg-center bg-fixed bg-cover overflow-x-hidden"
-            style="background-image: url('{{asset('/storage/images/grid.svg')}}');">
+            style="background-image: url('{{asset('storage/images/grid.svg')}}');">
             <section id="sidenav" x-data="{ sidenav : false }"
                 class="flex flex-col min-h-full bg-blacksmoky/50 shadow-lg">
                 <ul class="flex flex-col px-4 gap-y-4 select-none">
