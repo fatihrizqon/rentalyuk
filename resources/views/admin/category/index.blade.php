@@ -69,7 +69,7 @@
                             <td class="text-left">{{ $category->name }}</td>
                             <td class="text-center">
                                 @if($category->image)
-                                <img class="mx-auto" width="50" src="{{ route('/') }}/storage/{{ $category->image }}"
+                                <img class="mx-auto" width="50" src="{{asset('/storage/'.$category->image)}}"
                                     alt="{{ $category->name }}">
                                 @else
                                 <span>N/A</span>

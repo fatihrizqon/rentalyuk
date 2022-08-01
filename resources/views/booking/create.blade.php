@@ -2,7 +2,7 @@
     <section id="booking">
         <div class="flex flex-col w-full items-center justify-center gap-4">
             <div class="flex flex-col w-full lg:w-1/2 justify-center p-4 rounded-xl bg-white shadow-md bg-center bg-fixed"
-                style="background-image: url(/images/sprinkle.svg)">
+                style="background-image: url(/storage/images/sprinkle.svg)">
                 <div class="grid grid-cols-1 gap-4 justify-items-start mb-4">
                     <h2 class="font-normal text-3xl text-redfire"><span class=" font-bold text-redruby">Easy
                             Book</span> for your Nice Trip</h2>
@@ -33,8 +33,7 @@
                         <div class="grid gap-y-4">
                             <h3 class="font-medium text-md text-blackeerie">Booking Details:</h3>
                             <div class="flex w-full justify-center">
-                                <img class="bg-white" width="150"
-                                    src="{{ route('/') }}/storage/{{ $data['vehicle']->image }}"
+                                <img class="bg-white" width="150" src="{{asset('/storage/'.$data['vehicle']->image)}}"
                                     alt="{{ $data['vehicle']->name }}">
                             </div>
                             <div class="form-control">

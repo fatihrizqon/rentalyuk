@@ -27,7 +27,7 @@
                             @enderror
                         </div>
                         <div class="flex items-center justify-between">
-                            <a class="text-sm" href="{{ route('login') }}">Back to
+                            <a class="text-sm hover:text-info " href="{{ route('login') }}">Back to
                                 Login Page</a>
                             <button type="submit" class="btn border text-white bg-primary w-1/4">Submit</button>
                         </div>

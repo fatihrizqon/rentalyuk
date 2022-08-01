@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Exports\CategoriesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -74,6 +75,7 @@ class CategoryController extends Controller
 
         if($request->file('image')){
             $attributes['image'] = $request->file('image')->store('images');
+            // $attributes['image'] = Storage::put("images", $request->file('image')); # dropbox file storage
         }
 
         $category = Category::find($id);

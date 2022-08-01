@@ -4,21 +4,20 @@ namespace Database\Seeders;
  
 use App\Models\User;
 use App\Models\Admin;
-use App\Models\Category;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CategorySeeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {  
         $user = User::create([
+            'id'                => 0,
             'username'          => 'Admin',
             'name'              => 'Administrator',
-            'email'             => 'test@example.com',
+            'email'             => 'admin@rentalyuk.com',
             'password'          => Hash::make('123123'),
             'image'             => 'users/avatar.png',
             'phone'             => '+62',

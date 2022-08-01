@@ -9,7 +9,9 @@
                 <div
                     class="flex flex-col overflow-hidden justify-center items-center w-full gap-2 py-4 shadow-md bg-redfire rounded-3xl">
                     <img width="250" class="flex h-24 w-24 bg-white rounded-full border"
-                        src="{{ route('/') }}/storage/{{ $user->image }}" alt="{{ $user->username }}">
+                        src="{{asset('/storage/'.$user->image)}}" alt="{{ $user->username }}">
+
+
                     <span class=" text-sm text-center">
                         <button @click="image = true" class="btn text-white hover:text-white/50 rounded-md border">
                             Edit Picture
