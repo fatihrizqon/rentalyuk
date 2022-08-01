@@ -131,7 +131,8 @@
                     <tbody>
                         @foreach($vehicles as $vehicle)
                         <tr class="bg-white border-b hover:bg-gray-300 transition duration-300">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $vehicle->id }}
+                            </td>
                             <td class="text-left">
                                 {{ $vehicle->license_number }}
                             </td>
@@ -140,8 +141,8 @@
                                 {{ $vehicle->name }}
                             </td>
                             <td class="text-center">
-                                <!-- <img width="25" src="{{ route('/') }}storage/{{ $vehicle->image }}"
-                                    alt="{{ $vehicle->name }} {{ $vehicle->license_number }}"> -->
+                                <img width="25" src="{{ asset('storage/'.$vehicle->image) }}"
+                                    alt="{{ $vehicle->name }} {{ $vehicle->license_number }}">
                             </td>
                             <td class="text-center">
                                 Rp.{{ $vehicle->price }},-/day (24 hours)

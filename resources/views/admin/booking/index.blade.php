@@ -103,7 +103,7 @@
                     <tbody>
                         @foreach($bookings as $booking)
                         <tr>
-                            <td>#</td>
+                            <td>{{ $booking->id }}</td>
                             <td class="text-left">
                                 {{ $booking->code }}
                             </td>

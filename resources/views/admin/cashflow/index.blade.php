@@ -137,7 +137,7 @@
                     <tbody>
                         @foreach($cashflows as $cashflow)
                         <tr>
-                            <td>#</td>
+                            <td>{{ $cashflow->id }}</td>
                             <td class="text-left">
                                 {{ $cashflow->code }}
                             </td>

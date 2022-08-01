@@ -35,11 +35,11 @@ class BookingController extends Controller
                 'from' => 'required',
                 'to'   => 'required|after:from',
             ]);
-            $bookings = Booking::whereBetween('created_at', [$from, $to])->with(['user','vehicle'])->sortable()->paginate(10);              
+            $bookings = Booking::whereBetween('created_at', [$from, $to])->with(['user','vehicle'])->orderBy('created_at', 'desc')->sortable()->paginate(10);              
         }elseif($keywords){
-            $bookings = Booking::where('code', 'like', '%' . $keywords . '%')->with(['user','vehicle'])->sortable()->paginate(10);           
+            $bookings = Booking::where('code', 'like', '%' . $keywords . '%')->with(['user','vehicle'])->orderBy('created_at', 'desc')->sortable()->paginate(10);           
         }else{
-            $bookings = Booking::sortable()->with(['user','vehicle'])->paginate(10);
+            $bookings = Booking::orderBy('created_at', 'desc')->sortable()->with(['user','vehicle'])->paginate(10);
         }
         
         return view('admin.booking.index', [

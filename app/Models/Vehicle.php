@@ -21,7 +21,8 @@ class Vehicle extends Model
         $filters = ['from' => $filters[0], 'to' => $filters[1]];
         return $query->whereDoesntHave('bookings', function($query) use($filters){
                $query->where('status', 1)
-                     ->whereBetween('from', [$filters['from'], $filters['to']]); 
+                     ->whereBetween('from', [$filters['from'], $filters['to']]);
+                    //  ->whereBetween('to', [$filters['from'], $filters['to']]);
         });
       });
 
