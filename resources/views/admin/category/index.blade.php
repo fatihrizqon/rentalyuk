@@ -65,8 +65,8 @@
                     <tbody>
                         @foreach($categories as $category)
                         <tr>
-                            <td class="text-left">{{ $cashflow->id }}</td>
-                            <td class="text-left">{{ $cashflow->code }}</td>
+                            <td class="text-left">{{ $category->id }}</td>
+                            <td class="text-left">{{ $category->code }}</td>
                             <td class="text-center">
                                 @if($category->image)
                                 <img class="mx-auto" width="50" src="{{asset('storage/'.$category->image)}}"
