@@ -74,7 +74,7 @@ class VehicleController extends Controller
         $attributes = $request->validate([
             'license_number' => ['required', 'min:3', 'max:9'],
             'name'           => ['required'],
-            'image'          => ['file', 'mimes:svg,png,jpg,gif', 'max:4096'],
+            'image'          => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
             'price'          => ['required'],
             'category_id'    => ['required'],
         ]);
@@ -113,7 +113,7 @@ class VehicleController extends Controller
         $attributes = $request->validate([
             'license_number' => ['required', 'min:3', 'max:9'],
             'name'           => ['required'],
-            'image'          => ['file', 'mimes:svg,png,jpg,gif', 'max:4096'],
+            'image'          => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
             'price'          => ['required'],
             'category_id'    => ['required'],
             'status'         => ['required'],

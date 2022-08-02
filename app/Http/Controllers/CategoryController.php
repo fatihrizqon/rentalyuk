@@ -35,7 +35,7 @@ class CategoryController extends Controller
     {
         $attributes = $request->validate([
             'name'  => ['required', 'min:3'],
-            'image' => ['file', 'mimes:svg,png,jpg,gif', 'max:4096'],
+            'image' => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
         ]);
 
         $attributes['name'] = Str::ucfirst($attributes['name']);
@@ -68,7 +68,7 @@ class CategoryController extends Controller
     {
         $attributes = $request->validate([
             'name'  => ['required', 'min:3'],
-            'image' => ['file', 'mimes:svg,png,jpg,gif', 'max:4096'],
+            'image' => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
         ]);
 
         $attributes['name'] = Str::ucfirst($attributes['name']);

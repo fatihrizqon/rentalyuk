@@ -36,7 +36,7 @@
                         <input name="image" id="image"
                             class="rounded-r-md transition duration-300 ease-in-out focus:border-amber form-label text-redfire select-none"
                             type="file">
-                        <p class="mt-1 text-xs">SVG, PNG, JPG, or GIF
+                        <p class="mt-1 text-xs">SVG, PNG, JPG, GIF, or AVIF.
                             (Max res/size. 2048x2048px/4mb).</p>
                         @error('image')
                         <span class="form-label text-redfire">{{ $message }}</span>
