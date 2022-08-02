@@ -23,16 +23,60 @@
 
     <body>
         <header class="flex w-full top-0 left-0 shadow-md bg-redfire">
-            <div class="flex w-full items-center justify-between py-3 text-white">
-                <ul class="flex justify-between items-center w-full lg:px-12">
-                    <li class="group flex items-center justify-center gap-2">
-                        <a class="pacifico font-medium text-xl" href="{{ route('/') }}#home">{{ env('APP_NAME') }} </a>
+            <div x-data="{ navigation : true }" class="flex w-full items-center justify-between py-3 text-white">
+                <ul class="flex flex-wrap justify-between items-center w-[90%] mx-auto">
+                    <li class="group flex items-center gap-2">
+                        <a class="pacifico font-medium text-xl hover:text-gray-300"
+                            href="{{ route('/') }}#home">{{ env('APP_NAME') }}</a>
                     </li>
 
-                    <li class="group">
-                        <button id="account-button"
-                            class="px-2 flex lg:px-0 items-center justify-center hover:text-redfire transition duration-150"
-                            type="button"><i class="bx bx bx-user bx-sm"></i></button>
+                    <li x-data="{ account : false }" class=" flex flex-row select-none" x-show="navigation"
+                        @scroll.window.throttle="account = false" x-transition>
+                        <ul class="relative">
+                            <li class="flex flex-row items-center justify-between px-2">
+                                <button @click="account = !account" type="button"
+                                    class="navlink inline-flex justify-start items-center text-base font-light"
+                                    aria-expanded="true" aria-haspopup="true">
+                                    {{ Auth::user()->username }}
+                                    <i class='bx bx-chevron-down bx-sm'></i>
+                                </button>
+                            </li>
+
+                            <li id="account" x-show="account" x-transition @click.outside="account = false"
+                                class="hidden absolute right-0 mt-2 font-light">
+                                <ul class="flex flex-col w-60 gap-2 bg-white text-redruby rounded-lg p-2 shadow-md">
+                                    <li>
+                                        <a class="px-2 hover:text-gray-600 font-medium"
+                                            href="{{ route('/') }}#home">Home</a>
+                                    </li>
+                                    <li>
+                                        <a class="px-2 hover:text-gray-600 font-medium"
+                                            href="{{ route('/') }}#about">About</a>
+                                    </li>
+                                    <li>
+                                        <a class="px-2 hover:text-gray-600 font-medium"
+                                            href="{{ route('/') }}#footer">Contact</a>
+                                    </li>
+                                    <li>
+                                        <a class="px-2 hover:text-gray-600 font-medium"
+                                            href="{{ route('booking') }}">Booking</a>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <a href="{{ route('account') }}"
+                                            class="px-2 hover:text-gray-600 font-medium">Account
+                                            Settings</a>
+                                    </li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                class="px-2 hover:text-gray-600 font-medium">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -131,32 +175,30 @@
                 <div class="mb-2 flex items-center justify-center">
                     <a href="https://www.instagram.com/fatihrizqon"
                         class="mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-instagram  "></i>
+                        target="_blank"><i class="bx bxl-instagram bx-xs"></i>
                     </a>
                     <a href="https://www.twitter.com/fatihrizqon"
                         class="mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-twitter  "></i>
+                        target="_blank"><i class="bx bxl-twitter bx-xs"></i>
                     </a>
                     <a href="mailto: fatihrizqon@gmail.com"
                         class="mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-gmail  "></i>
+                        target="_blank"><i class="bx bxl-gmail bx-xs"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/fatihrizqon/"
                         class="hover:bg-darwhitek mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-linkedin-square  "></i>
+                        target="_blank"><i class="bx bxl-linkedin-square bx-xs"></i>
                     </a>
                     <a href="https://www.github.com/fatihrizqon"
                         class="mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-github  "></i>
+                        target="_blank"><i class="bx bxl-github bx-xs"></i>
                     </a>
                 </div>
                 <div class="flex items-center justify-center text-center text-xs font-normal text-white">
-                    <span x-show="sidenav" x-transition @click.outside="sidenav = false" class="mr-1"><a
-                            href="https://www.instagram.com/fatihrizqon/"
+                    <span class="mr-1"><a href="https://www.instagram.com/fatihrizqon/"
                             class="transition duration-300 hover:text-slate-200" target="_blank">Muhammad Fatih
-                            Rizqon </a> (2022) |
-                        Created by using</span>
-                    <a href="https://tailwindcss.com/" target="_blank"><i class="bx bxl-tailwind-css  "
+                            Rizqon </a> (2022) | </span>
+                    <a href="https://tailwindcss.com/" target="_blank"><i class="bx bxl-tailwind-css bx-sm"
                             style="color: #38bdf8"></i></a>
                 </div>
             </div>

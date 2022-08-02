@@ -7,7 +7,8 @@ const sidenav_link = document.querySelectorAll(".sidenav-link");
 const currentLocation = location.href;
 
 window.onload = function () {
-    document.querySelector("#modal") ? document.querySelector("#modal").classList.remove("hidden") : ''
+    document.querySelector("#modal") ? document.querySelector("#modal").classList.remove("hidden") : '';
+    document.querySelector("#account") ? document.querySelector("#account").classList.remove("hidden") : ''
 }
 
 

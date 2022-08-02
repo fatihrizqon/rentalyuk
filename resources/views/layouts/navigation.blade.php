@@ -83,7 +83,7 @@
                 <a class="navlink" href="{{ route('register') }}">Register</a>
             </li>
             @else
-            <li x-data="{ account : false }" class="py-2 hidden lg:flex lg:flex-row select-none" x-show="navigation"
+            <li x-data="{ account : false }" class="hidden lg:flex lg:flex-row select-none" x-show="navigation"
                 @scroll.window.throttle="account = false" x-transition>
                 <ul class="relative">
                     <li class="flex flex-row items-center justify-between px-2">
@@ -99,13 +99,15 @@
                         class="hidden absolute right-0 mt-2 font-light">
                         <ul class="flex flex-col w-60 gap-2 bg-white text-redruby rounded-lg p-2 shadow-md">
                             <li>
-                                <a href="{{ route('account') }}" class="px-2 py-1 hover:text-gray-600">Account
+                                <a href="{{ route('account') }}"
+                                    class="px-2 py-1 hover:text-gray-600 font-medium">Account
                                     Settings</a>
                             </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="px-2 py-1 hover:text-gray-600">Logout</button>
+                                    <button type="submit"
+                                        class="px-2 py-1 hover:text-gray-600 font-medium">Logout</button>
                                 </form>
                             </li>
                         </ul>

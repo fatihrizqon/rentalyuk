@@ -94,34 +94,33 @@
                 </div>
             </div>
 
-            <div class="self-end w-full py-8">
+            <div class="self-end w-full py-4">
                 <div class="mb-2 flex items-center justify-center">
                     <a href="https://www.instagram.com/fatihrizqon"
                         class="mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-instagram bx-sm"></i>
+                        target="_blank"><i class="bx bxl-instagram bx-xs"></i>
                     </a>
                     <a href="https://www.twitter.com/fatihrizqon"
                         class="mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-twitter bx-sm"></i>
+                        target="_blank"><i class="bx bxl-twitter bx-xs"></i>
                     </a>
                     <a href="mailto: fatihrizqon@gmail.com"
                         class="mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-gmail bx-sm"></i>
+                        target="_blank"><i class="bx bxl-gmail bx-xs"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/fatihrizqon/"
                         class="hover:bg-darwhitek mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-linkedin-square bx-sm"></i>
+                        target="_blank"><i class="bx bxl-linkedin-square bx-xs"></i>
                     </a>
                     <a href="https://www.github.com/fatihrizqon"
                         class="mr-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-light text-white hover:text-redfire hover:bg-white transition duration-300"
-                        target="_blank"><i class="bx bxl-github bx-sm"></i>
+                        target="_blank"><i class="bx bxl-github bx-xs"></i>
                     </a>
                 </div>
                 <div class="flex items-center justify-center text-center text-xs font-normal text-white">
                     <span class="mr-1"><a href="https://www.instagram.com/fatihrizqon/"
                             class="transition duration-300 hover:text-slate-200" target="_blank">Muhammad Fatih
-                            Rizqon </a> (2022) |
-                        Created by using</span>
+                            Rizqon </a> (2022) | </span>
                     <a href="https://tailwindcss.com/" target="_blank"><i class="bx bxl-tailwind-css bx-sm"
                             style="color: #38bdf8"></i></a>
                 </div>
