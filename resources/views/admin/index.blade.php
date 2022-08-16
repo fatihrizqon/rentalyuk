@@ -196,10 +196,10 @@
     <script>
         const bctx = document.getElementById('bookingChart');
         const cctx = document.getElementById('categoryChart');
-        const bookingy = JSON.parse('{!! json_encode($bookingy) !!}');
-        const bookingx = JSON.parse('{!! json_encode($bookingx) !!}');
-        const categoryy = JSON.parse('{!! json_encode($categoryy) !!}');
-        const categoryx = JSON.parse('{!! json_encode($categoryx) !!}');
+        const bookingy = JSON.parse(`{!! json_encode($bookingChart['y']) !!}`);
+        const bookingx = JSON.parse(`{!! json_encode($bookingChart['x']) !!}`);
+        const categoryy = JSON.parse(`{!! json_encode($categoryChart['y']) !!}`);
+        const categoryx = JSON.parse(`{!! json_encode($categoryChart['x']) !!}`);
         const bookings = {
             labels: bookingy,
             datasets: [{

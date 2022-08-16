@@ -9,6 +9,7 @@ use App\Models\Vehicle;
 use App\Models\Cashflow;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Services\AdminService;
 
 class AdminController extends Controller
 {
@@ -23,34 +24,15 @@ class AdminController extends Controller
         $this->to   = $request->to;
     }
 
-    public function index()
+    public function index(AdminService $adminService)
     {
-        $bookings = Booking::where('status', 1)->select('id', 'created_at')->orderBy('created_at', 'desc')->get()->groupBy(function($booking){
-            return Carbon::parse($booking->created_at)->format('M/y');
-        })->take(12)->reverse();
-        $bookingy = [];
-        $bookingx = [];
-        foreach($bookings as $month => $total){
-            $bookingy[] = $month;
-            $bookingx[] = count($total);
-        }
-
-        $categories = Category::get();
-        $categoryx = [];
-        $categoryy = [];
-        foreach($categories as $category){ 
-            $categoryx[] = $category['name'];
-            $categoryy[] = count($category['bookings']->where('status', 1));
-        } 
         return view('admin.index', [
-            'vehicles'   => Vehicle::withCount('bookings')->get(),
-            'bookings'   => Booking::sortable()->with(['user','vehicle'])->orderBy('created_at', 'desc')->paginate(5),
+            'vehicles'   => Vehicle::select('id')->withCount('bookings')->get(),
+            'bookings'   => Booking::sortable()->with(['user' => function($query){ return $query->select('id', 'name');},'vehicle' => function($query){ return $query->select('id', 'name');}])->orderBy('created_at', 'desc')->paginate(5),
             'cashflows'  => Cashflow::sortable()->paginate(5),
-            'users'      => User::get(),
-            'bookingx'   => $bookingx,
-            'bookingy'   => $bookingy,
-            'categoryx'  => $categoryx,
-            'categoryy'  => $categoryy,
+            'users'      => User::select('id')->get(),
+            'bookingChart' => $adminService->bookingChart(),
+            'categoryChart' => $adminService->categoryChart(),
         ]);
     }
     

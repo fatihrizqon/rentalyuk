@@ -27,7 +27,7 @@
             </div>
         </header>
 
-        <main class="bg-redruby">
+        <main id="main" class="bg-redruby">
             {{ $slot }}
         </main>
 

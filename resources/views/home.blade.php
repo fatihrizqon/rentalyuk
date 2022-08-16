@@ -93,7 +93,6 @@
         <div class="flex justify-center py-8 bg-transparent container">
             <ul
                 class="w-full grid grid-cols-2 gap-5 justify-items-center md:grid-cols-3 lg:flex lg:flex-wrap items-center lg:justify-evenly">
-
                 @foreach($categories as $category)
                 @if($category->image)
                 <li>
