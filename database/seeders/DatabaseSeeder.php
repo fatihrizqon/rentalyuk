@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             'id'                => 0,
             'username'          => 'Admin',
             'name'              => 'Administrator',
-            'email'             => 'admin@rentalyuk.com',
+            'email'             => 'admin@rentalyuk.id',
             'password'          => Hash::make('123123'),
             'image'             => 'users/avatar.png',
             'phone'             => '+62',

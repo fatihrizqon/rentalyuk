@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Exports\VehiclesExport;
 use App\Imports\VehiclesImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class VehicleController extends Controller
 {
@@ -78,12 +79,10 @@ class VehicleController extends Controller
             'price'          => ['required'],
             'category_id'    => ['required'],
         ]);
-
-        $attributes['license_number'] = Str::upper($request->license_number);
-        $attributes['name']           = Str::ucfirst($request->name);
         
         if($request->file('image')){
-            $attributes['image'] = $request->file('image')->store('images');
+            $path = Storage::disk('do')->putFile('images', $request->file('image'), 'public');
+            $attributes['image'] = $path;
         }
 
         try{
@@ -119,11 +118,9 @@ class VehicleController extends Controller
             'status'         => ['required'],
         ]);
 
-        $attributes['license_number'] = Str::upper($attributes['license_number']);
-        $attributes['name']           = Str::ucfirst($attributes['name']);
-
         if($request->file('image')){
-            $attributes['image'] = $request->file('image')->store('images');
+            $path = Storage::disk('do')->putFile('images', $request->file('image'), 'public');
+            $attributes['image'] = $path;
         }
 
         $vehicle = Vehicle::find($id);

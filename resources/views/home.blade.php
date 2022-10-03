@@ -17,7 +17,7 @@
                                     <div class="swiper-slide">
                                         <div class="w-full aspect-video relative overflow-hidden">
                                             <div class="absolute w-full h-full bg-cover bg-center transition duration-300"
-                                                style="background-image: url('{{asset('storage/'.$vehicle->image)}}');">
+                                                style="background-image: url('{{ env('DO_URL') .'/'. $vehicle->image }}');">
                                             </div>
                                         </div>
                                     </div>
@@ -35,7 +35,7 @@
             <div class="bg-redfire min-h-screen w-2/3"></div>
 
             <div class="bg-[#212121] min-h-screen w-1/3 bg-repeat bg-fixed"
-                style="background-image: url(storage/images/sprinkle.svg)"></div>
+                style="background-image: url(images/sprinkle.svg)"></div>
         </div>
     </section>
 
@@ -81,7 +81,6 @@
                     } else {
                         counter.innerText = value;
                     }
-
                 }
                 animate();
             });
@@ -97,7 +96,7 @@
                 @if($category->image)
                 <li>
                     <img class="hover:scale-105 transition duration-300 grayscale" width="60"
-                        src="{{asset('storage/'.$category->image)}}" alt="{{ $category->name }}">
+                        src="{{ env('DO_URL') .'/'. $category->image }}" alt="{{ $category->name }}">
                 </li>
                 @endif
                 @endforeach
@@ -108,8 +107,7 @@
     <section id="about" class="flex flex-wrap min-h-screen">
         <div class="flex flex-wrap w-full lg:w-1/2 bg-redruby items-start lg:items-center justify-center p-5">
             <div class="container grid gap-3 justify-items-center justify-center">
-                <img class="w-full md:w-1/2" src="{{asset('storage/images/app-logo.svg')}}"
-                    alt="{{ env('APP_NAME') }}" />
+                <img class="w-full md:w-1/2" src="{{asset('images/app-logo.svg')}}" alt="{{ env('APP_NAME') }}" />
                 <h3 class="font-bold text-lg text-white italic">service with passion</h3>
                 <p class="text-base font-semibold text-white text-center">Lorem ipsum dolor, sit amet consectetur
                     adipisicing
@@ -135,7 +133,7 @@
 
                 <li class="w-full aspect-[4/3] sm:w-1/2 lg:w-1/3 group relative overflow-hidden">
                     <div class="absolute group-hover:scale-110 group-hover:bg-opacity-40 w-full h-full bg-cover bg-center transition duration-300"
-                        style="background-image: url('{{asset('storage/'.$vehicle->image)}}');">
+                        style="background-image: url('{{ env('DO_URL') .'/'. $vehicle->image }}');">
 
                     </div>
                 </li>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class AccountController extends Controller
@@ -39,7 +40,10 @@ class AccountController extends Controller
             $attributes = $request->validate([
                 'image' => 'required|image|mimes:jpg,png,jpeg|max:2048',
             ]);
-            $attributes['image'] = $request->file('image')->store('users');
+            
+            $path = Storage::disk('do')->putFile('users', $request->file('image'), 'public');
+            $attributes['image'] = $path;
+
             if($user->update($attributes)){
              return back()->with('status', 'Your profile image has been updated');
             }

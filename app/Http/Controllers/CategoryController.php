@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Exports\CategoriesExport;
+use App\Services\CategoryService;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,11 +16,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $keywords = $request->keywords;
-        
         if($keywords){
-            $request->validate([
-                'keywords' => 'required'
-            ]); 
             $categories = Category::where('name', 'like', '%' . $keywords . '%')->withCount('vehicles')->sortable()->paginate(10);           
         }else{
             $categories = Category::withCount(['vehicles', 'bookings'])->sortable()->paginate(10);
@@ -37,20 +34,18 @@ class CategoryController extends Controller
             'name'  => ['required', 'min:3'],
             'image' => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
         ]);
-
-        $attributes['name'] = Str::ucfirst($attributes['name']);
-        $attributes['slug'] = Str::slug($attributes['name']);
-
+ 
         if($request->file('image')){
-            $attributes['image'] = $request->file('image')->store('images');
+            $path = Storage::disk('do')->putFile('images', $request->file('image'), 'public');
+            $attributes['image'] = $path;
         }
 
         try{
             $category = Category::create($attributes);
             if($category){ 
-                return redirect('admin/categories')->with('status', 'A New category has been created.');
+                return redirect('admin/categories')->with('status', 'a new category has been created.');
             }else{
-                return redirect('admin/categories')->with('warning', 'Failed to add new category, please try again.');
+                return redirect('admin/categories')->with('warning', 'failed to create new category, please try again.');
             }
         }catch(\Exception $e){
             return response()->json(['success' => false,'message' => $e], 403);
@@ -70,18 +65,15 @@ class CategoryController extends Controller
             'name'  => ['required', 'min:3'],
             'image' => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
         ]);
-
-        $attributes['name'] = Str::ucfirst($attributes['name']);
-
+ 
         if($request->file('image')){
-            $attributes['image'] = $request->file('image')->store('images');
-            // $attributes['image'] = Storage::put("images", $request->file('image')); # dropbox file storage
+            $path = Storage::disk('do')->putFile('images', $request->file('image'), 'public');
+            $attributes['image'] = $path;
         }
 
         $category = Category::find($id);
         try{
             $category = $category->update($attributes); 
-            
             if($category){ 
                 return redirect('admin/categories')->with('status', 'Selected category has been updated.');
             }else{

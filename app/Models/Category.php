@@ -2,6 +2,7 @@
 
 namespace App\Models;
  
+use Illuminate\Support\Str;
 use App\Models\{Vehicle, Booking};
 use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,25 @@ class Category extends Model
     protected $fillable = [
         'name', 'image', 'slug'
     ];
+    
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::creating(function ($category) {
+            $category->name = Str::title($category->name);
+            $category->slug = Str::slug( $category->slug);
+
+        });
+
+        static::updating(function ($category) {
+            $category->name = Str::title($category->name);
+            $category->slug = Str::slug( $category->slug);
+        });
+    }
 
     public function vehicles()
     {

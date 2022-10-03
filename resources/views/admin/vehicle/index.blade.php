@@ -141,7 +141,7 @@
                                 {{ $vehicle->name }}
                             </td>
                             <td class="text-center">
-                                <img width="25" src="{{ asset('storage/'.$vehicle->image) }}"
+                                <img width="25" src="{{ env('DO_URL') .'/'. $vehicle->image }}"
                                     alt="{{ $vehicle->name }} {{ $vehicle->license_number }}">
                             </td>
                             <td class="text-center">

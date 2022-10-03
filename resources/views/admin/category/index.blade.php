@@ -21,7 +21,8 @@
                 </div>
             </div>
             <div x-show="open" x-transition>
-                <form class="grid gap-y-4 mt-4" action="{{ route('categories') }}" method="POST">
+                <form class="grid gap-y-4 mt-4" action="{{ route('categories') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="form-control">
                         <input class="peer" type="text" name="name" id="name" placeholder="Enter category name"
@@ -69,7 +70,7 @@
                             <td class="text-left">{{ $category->name }}</td>
                             <td class="text-center">
                                 @if($category->image)
-                                <img class="mx-auto" width="50" src="{{asset('storage/'.$category->image)}}"
+                                <img class="mx-auto" width="50" src="{{ env('DO_URL') .'/'. $category->image }}"
                                     alt="{{ $category->name }}">
                                 @else
                                 <span>N/A</span>

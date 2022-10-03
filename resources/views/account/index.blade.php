@@ -9,7 +9,7 @@
                 <div
                     class="flex flex-col overflow-hidden justify-center items-center w-full gap-2 py-4 shadow-md bg-redfire rounded-3xl">
                     <img width="250" class="flex h-24 w-24 bg-white rounded-full border"
-                        src="{{asset('/storage/'.$user->image)}}" alt="{{ $user->username }}">
+                        src="{{ env('DO_URL') .'/'. $user->image }}" alt="{{ $user->username }}">
 
 
                     <span class=" text-sm text-center">
@@ -118,7 +118,7 @@
                     <div class="w-full lg:w-1/5 bg-white shadow-md rounded-md items-center justify-center">
                         <div class="w-full aspect-[4/3] group relative overflow-hidden">
                             <div class="absolute group-hover:scale-110 group-hover:bg-opacity-40 w-full h-full bg-cover bg-center transition duration-300"
-                                style="background-image: url('{{ route('/') }}/storage/{{ $vehicle->image }}');">
+                                style="background-image: url('{{ env('DO_URL') .'/'. $vehicle->image }}');">
                             </div>
                         </div>
                         <div>

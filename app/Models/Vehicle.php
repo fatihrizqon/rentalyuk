@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,6 +14,25 @@ class Vehicle extends Model
     protected $fillable = [
       'license_number','name','image','price','category_id','status'
     ];
+
+    
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::creating(function ($vehicle) {
+            $vehicle->name = Str::title($vehicle->name);
+            $vehicle->license_number = Str::upper( $vehicle->license_number);
+        });
+
+        static::updating(function ($vehicle) {
+            $vehicle->name = Str::title($vehicle->name);
+            $vehicle->license_number = Str::upper( $vehicle->license_number);
+        });
+    }
 
     public function scopeFilter($query, array $filters)
     {
