@@ -27,7 +27,6 @@ class Category extends Model
         static::creating(function ($category) {
             $category->name = Str::title($category->name);
             $category->slug = Str::slug($category->name);
-            // $category->image = $category->image ? (string) Image::make($category->name)->encode('webp ', 100) : '';
         });
 
         static::updating(function ($category) {

@@ -25,7 +25,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => ['required', 'min:3', Rule::unique('categories', 'name')->ignore($this->category)],
+            'name'  => ['required', 'string', 'min:3'],
             'image' => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
         ];
     }
