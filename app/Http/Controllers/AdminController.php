@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\Booking;
 use App\Models\Vehicle;
 use App\Models\Cashflow;
@@ -31,54 +32,36 @@ class AdminController extends Controller
             'bookings'   => Booking::sortable()->with(['user' => function($query){ return $query->select('id', 'name');},'vehicle' => function($query){ return $query->select('id', 'name');}])->orderBy('created_at', 'desc')->paginate(5),
             'cashflows'  => Cashflow::sortable()->paginate(5),
             'users'      => User::select('id')->get(),
-            'bookingChart' => $adminService->bookingChart(),
+            'bookingChart'  => $adminService->bookingChart(),
             'categoryChart' => $adminService->categoryChart(),
         ]);
     }
-    
-    // public function booking(Request $request)
-    // {
-    //     $keywords = $request->keywords; 
-    //     if($this->from && $this->to){ 
-    //         $request->validate([
-    //             'from' => 'required',
-    //             'to'   => 'required|after:from',
-    //         ]);
-    //         $bookings = Booking::filter(['from' => $this->from, 'to' => $this->to])->sortable()->paginate(10); 
-    //     }elseif($keywords){
-    //         $request->validate([
-    //             'keywords' => 'required'
-    //         ]); 
-    //         $bookings = Booking::filter(['keywords' => $keywords])->sortable()->paginate(10);
-    //     }else{
-    //         $bookings = Booking::sortable()->paginate(10);
-    //     }
-        
-    //     return view('admin.booking.index', [
-    //         'bookings' => $bookings,
-    //         'date'     => $this->date,
-    //         'from'     => $this->from,
-    //         'to'       => $this->to
-    //     ]);
-    // }
-    
-    // public function cashflow()
-    // {
-    //     /**
-    //      * Bikin MFC baru, Transaction
-    //      * Tiap ada paid booking, masuk ke cash-in
-    //      * Tiap ada pengeluaran, masuk ke cash-out
-    //      */
-    //     return view('admin.cashflow.index', [
-    //         'bookings' => [],
-    //         'date'     => Carbon::now()->format('Y-m-d\TH:i'),
-    //         'from'     => '',
-    //         'to'       => ''
-    //     ]);
-    // }
-    
-    // public function user()
-    // {
-    //     return view('admin.user.index');
-    // }
+
+    public function create(Request $request)
+    {
+        try {
+            $attributes = $request->validate(['user_id'  => ['required', 'exists:users,id']]);
+            Admin::create($attributes);
+            return redirect()->back()->with('status', 'a new user has been set as an administrator.');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $attributes = $request->validate(['user_id'  => ['required', 'exists:users,id']]);
+            Admin::findOrFail($attributes['user_id'])->delete();
+            return redirect()->back()->with('status', 'an administrator has been deleted.');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
 }

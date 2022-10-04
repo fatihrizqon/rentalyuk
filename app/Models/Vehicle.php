@@ -25,12 +25,12 @@ class Vehicle extends Model
     {
         static::creating(function ($vehicle) {
             $vehicle->name = Str::title($vehicle->name);
-            $vehicle->license_number = Str::upper( $vehicle->license_number);
+            $vehicle->license_number = Str::upper($vehicle->license_number);
         });
 
         static::updating(function ($vehicle) {
             $vehicle->name = Str::title($vehicle->name);
-            $vehicle->license_number = Str::upper( $vehicle->license_number);
+            $vehicle->license_number = Str::upper($vehicle->license_number);
         });
     }
 
@@ -42,10 +42,10 @@ class Vehicle extends Model
         return $query->whereDoesntHave('bookings', function($query) use($filters){
                $query->where('status', 1)
                      ->whereBetween('from', [$filters['from'], $filters['to']]);
-                    //  ->whereBetween('to', [$filters['from'], $filters['to']]);
         });
       });
 
+      // bugnya ketemu, ketika pakai category filter di atas gak jalan harusnya jalan tiga tiganya (from to category)
       $query->when($filters['category'] ?? false, function($query, $category){
         return $query->whereHas('category', function($query) use($category){
           $query->where('slug', $category);

@@ -2,44 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\CashflowsExport;
 use Carbon\Carbon;
 use App\Models\Cashflow;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Exports\CashflowsExport;
+use App\Services\CashflowService;
 use Illuminate\Support\Facades\Auth;
 
 class CashflowController extends Controller
 {
+    private $service;
+    private $date;
+    private $from;
+    private $to;
+    private $duration;
+
+    public function __construct(CashflowService $service, Request $request)
+    {
+        $this->service  = $service;
+        $this->date     = Carbon::now()->minute(0)->second(0)->format('Y-m-d\TH:i');
+        $this->from     = Carbon::parse($request->from)->minute(0)->second(0)->format('Y-m-d\TH:i');
+        $this->to       = Carbon::parse($request->to)->minute(0)->second(0)->format('Y-m-d\TH:i');
+        $this->duration = Carbon::parse($this->from)->diffInDays(Carbon::parse($this->to), false);
+    }
+
     public function index(Request $request)
     {
-        $date     = Carbon::now()->format('Y-m-d\TH:i');
-        $from     = $request->from;
-        $to       = $request->to;
-        $keywords = $request->keywords; 
- 
-        if($from && $to){
-            $request->validate([
-                'from' => 'required',
-                'to'   => 'required|after:from',
+        try {
+            $cashflows = $this->service->index($request->all());
+            return view('admin.cashflow.index', [
+                'cashflows'=> $cashflows,
+                'date'     => $this->date,
+                'from'     => $this->from,
+                'to'       => $this->to,
+                'keywords' => $request->keywords
             ]);
-            $cashflows = Cashflow::whereBetween('created_at', [$from, $to])->sortable()->paginate(10);              
-        }elseif($keywords){
-            $request->validate([
-                'keywords' => 'required'
-            ]); 
-            $cashflows = Cashflow::where('code', 'like', '%' . $keywords . '%')->sortable()->paginate(10);           
-        }else{
-            $cashflows = Cashflow::sortable()->paginate(10);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
         }
-        
-        return view('admin.cashflow.index', [
-            'cashflows'=> $cashflows,
-            'date'     => $date,
-            'from'     => $from,
-            'to'       => $to,
-            'keywords' => $keywords
-        ]);
     }
 
     public function store(Request $request)
@@ -50,50 +54,15 @@ class CashflowController extends Controller
             'value' => ['required', 'min:3']
         ]);
          
-        try{
-            $attributes['code']    = Str::upper(Str::random(6)) . Carbon::now()->format('YmdHis');
-            $attributes['user_id'] = Auth::user()->id;
-            $cashflow              = Cashflow::create($attributes);
-            if($cashflow){
-                return redirect()->back()->with('status', 'Congratulations, a new transaction has been created.');
-            }else{
-                return redirect()->back()->with('warning', 'An error has been occured. Please try again.');
-            }
-        }catch(\Exception $e){
-            return response()->json(['success' => false,'message' => $e], 403);
-        }
-    }
-
-    public function show(Request $request)
-    {
-        $date     = Carbon::now()->format('Y-m-d\TH:i');
-        $from     = $request->from;
-        $to       = $request->to;
-        $keywords = $request->keywords; 
- 
-        if($from && $to){
-            die('filter by date');
-            $request->validate([
-                'from' => 'required',
-                'to'   => 'required|after:from',
+        try {
+            $this->service->create($attributes);
+            return redirect()->back()->with('status', 'a new transaction has been created.');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
             ]);
-            $cashflows = Cashflow::whereBetween('created_at', [$from, $to])->sortable()->paginate(10);              
-        }elseif($keywords){
-            die('filter by kw');
-            $request->validate([
-                'keywords' => 'required'
-            ]); 
-            $cashflows = Cashflow::where('code', 'like', '%' . $keywords . '%')->sortable()->paginate(10);           
-        }else{
-            $cashflows = Cashflow::sortable()->paginate(10);
         }
-        
-        return view('admin.cashflow.index', [
-            'cashflows' => $cashflows,
-            'date'     => $date,
-            'from'     => $from,
-            'to'       => $to
-        ]);
     }
 
     public function export(Request $request)

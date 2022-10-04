@@ -103,7 +103,7 @@
                     <tbody>
                         @foreach($bookings as $booking)
                         <tr>
-                            <td>{{ $booking->id }}</td>
+                            <td>#</td>
                             <td class="text-left">
                                 {{ $booking->code }}
                             </td>
@@ -144,11 +144,12 @@
                                 {{ $booking->updated_at }}
                             </td>
                             <td class="flex flex-row items-center justify-center gap-x-2">
-                                @if($booking->status !== 1)<button type="button"
-                                    @click="modal = true, data = {{ $bookings[$loop->index] }}"
+                                @if($booking->status === 0 &&
+                                Carbon\Carbon::now()->diffInDays(Carbon\Carbon::parse($booking->updated_at)) < 1)<button
+                                    type="button" @click="modal = true, data = {{ $bookings[$loop->index] }}"
                                     class="btn text-center text-white bg-primary">
                                     Action </button>
-                                @endif
+                                    @endif
                             </td>
                         </tr>
                         @endforeach
@@ -231,7 +232,7 @@
                                     @enderror
                                 </div>
                                 <div class="flex items-center justify-between">
-                                    <button @click="modal = false"
+                                    <button type="button" @click="modal = false"
                                         class="btn rounded-lg bg-danger text-white self-end">Cancel</button>
                                     <button type="submit"
                                         class="btn rounded-lg bg-primary text-white self-end">Save</button>

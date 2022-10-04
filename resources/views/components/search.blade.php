@@ -1,12 +1,12 @@
 <div class="flex w-full h-full justify-center shadow-md bg-center bg-fixed select-none"
-    style="background-image: url(storage/images/sprinkle.svg)">
+    style="background-image: url(images/sprinkle.svg)">
     <div class="grid w-full p-4">
         <div class="p-2">
             <h2 class="font-normal text-3xl text-redfire"><span class="font-bold text-redruby">Easy
                     Book</span> for your nice trip</h2>
             <h3 class="font-semibold text-md text-redfire">Find what you needs below:</h3>
         </div>
-        <form class="grid gap-y-4 w-full p-2" action="{{ route('booking.search') }}" method="GET">
+        <form class="grid gap-y-4 w-full p-2" action="{{ route('booking.filter') }}" method="GET">
             <div class="grid gap-4 lg:flex lg:flex-col w-full">
                 <div class="grid gap-4 lg:flex items-start w-full">
                     <div class="form-control w-full">

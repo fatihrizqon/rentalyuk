@@ -33,7 +33,8 @@
                         <div class="grid gap-y-4">
                             <h3 class="font-medium text-md text-blackeerie">Booking Details:</h3>
                             <div class="flex w-full justify-center">
-                                <img class="bg-white" width="150" src="{{asset('storage/'.$data['vehicle']->image)}}"
+                                <img class="bg-white" width="150"
+                                    src="{{ env('DO_URL') .'/'. $data['vehicle']->image }}"
                                     alt="{{ $data['vehicle']->name }}">
                             </div>
                             <div class="form-control">

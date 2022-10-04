@@ -14,7 +14,9 @@ class VehicleRepository implements BaseRepository{
     }
 
     public function all(){
-        return $this->vehicle->all();
+        return $this->vehicle->withCount(['bookings' => function($query){
+            $query->where('status', 1);
+        }])->get();
     }
     
     public function create($attributes){
@@ -31,5 +33,13 @@ class VehicleRepository implements BaseRepository{
     
     public function delete($id){
         return $this->vehicle->findOrFail($id)->delete();
+    }
+
+    public function filter($attributes)
+    {
+        return $this->vehicle->filter($attributes)
+                             ->orderBy('id', 'asc')
+                             ->where('status', 1)
+                             ->paginate(10)->withQueryString();
     }
 }

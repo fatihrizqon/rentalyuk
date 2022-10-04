@@ -14,7 +14,7 @@ class CategoryRepository implements BaseRepository{
     }
 
     public function all(){
-        return $this->category->all();
+        return $this->category->withCount(['vehicles', 'bookings'])->sortable()->paginate(10);
     }
     
     public function create($attributes){

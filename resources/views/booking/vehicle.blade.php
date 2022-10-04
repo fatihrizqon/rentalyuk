@@ -8,11 +8,11 @@
                 class="flex flex-col w-full lg:w-1/2 bg-redfire text-white items-center justify-center rounded-md p-2 gap-2">
                 <div class="flex flex-wrap items-center justify-center gap-1">
                     <a class="chip border bg-redfire"
-                        href="{{ route('booking.search') }}?from={{ $from }}&to={{ $to }}">All
+                        href="{{ route('booking.filter') }}?from={{ $from }}&to={{ $to }}">All
                         Categories</a>
                     @foreach($categories as $category)
                     <a class="chip border bg-redfire"
-                        href="{{ route('booking.search') }}?category={{ $category->slug }}&from={{ $from }}&to={{ $to }}">{{ $category->name }}</a>
+                        href="{{ route('booking.filter') }}?category={{ $category->slug }}&from={{ $from }}&to={{ $to }}">{{ $category->name }}</a>
                     @endforeach
                 </div>
 

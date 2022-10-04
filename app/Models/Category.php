@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use App\Models\{Vehicle, Booking};
 use Kyslik\ColumnSortable\Sortable;
+use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,13 +26,13 @@ class Category extends Model
     {
         static::creating(function ($category) {
             $category->name = Str::title($category->name);
-            $category->slug = Str::slug( $category->slug);
-
+            $category->slug = Str::slug($category->name);
+            // $category->image = $category->image ? (string) Image::make($category->name)->encode('webp ', 100) : '';
         });
 
         static::updating(function ($category) {
             $category->name = Str::title($category->name);
-            $category->slug = Str::slug( $category->slug);
+            $category->slug = Str::slug( $category->name);
         });
     }
 

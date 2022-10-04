@@ -27,8 +27,7 @@
                         <div class="flex flex-wrap items-center justify-between gap-x-2">
                             <button class="btn rounded text-sm bg-info text-white" type="submit">Import</button>
                             <a class="btn text-success flex items-center justify-center"
-                                href="{{ route('vehicles.export', ['from' => $from, 'to' => $to, 'keywords' => $keywords]) }}"><i
-                                    class='bx bx-spreadsheet bx-sm'></i></a>
+                                href="{{ route('vehicles.export') }}"><i class='bx bx-spreadsheet bx-sm'></i></a>
                         </div>
                     </form>
                     <p class="mt-1 text-xs flex flex-wrap">Format Allowed: CSV, XLS, or XLSX (<a

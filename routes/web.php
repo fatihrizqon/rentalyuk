@@ -20,20 +20,21 @@ Route::middleware('auth')->group(function(){
     Route::put('/account/password', [AccountController::class, 'update_password']); 
     
     Route::middleware('verified')->group(function(){
-        Route::get('/booking', [BookingController::class, 'show'])->name('booking'); 
-        Route::get('/booking/search', [BookingController::class, 'search'])->name('booking.search'); 
+        Route::get('/booking', [BookingController::class, 'search'])->name('booking');
+        Route::get('/booking/filter', [BookingController::class, 'filter'])->name('booking.filter');
         Route::post('/booking/create', [BookingController::class, 'create'])->name('booking.create'); 
         Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
-        Route::get('/booking/{code}', [BookingController::class, 'show'])->name('booking.show');
     });
 });
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'administrator']],function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
+    Route::post('/create', [AdminController::class, 'create'])->name('admin.create');
+    Route::post('/delete', [AdminController::class, 'delete'])->name('admin.delete');
     
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings');
-    Route::put('/booking', [BookingController::class, 'update'])->name('bookings.update');
+    Route::put('/bookings', [BookingController::class, 'update'])->name('bookings.update');
     Route::get('/bookings/export', [BookingController::class, 'export'])->name('bookings.export');
     
     Route::get('/cashflows', [CashflowController::class, 'index'])->name('cashflows');
@@ -44,7 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'adminis
     Route::post('/categories', [CategoryController::class, 'store']);
     Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/category/{id}/edit', [CategoryController::class, 'update']);
-    Route::post('/category/delete', [CategoryController::class, 'destroy'])->name('categories.delete'); 
+    Route::delete('/category/delete', [CategoryController::class, 'destroy'])->name('categories.delete'); 
     Route::get('/categories/export', [CategoryController::class, 'export'])->name('categories.export');
     
     Route::get('/users', [UserController::class, 'index'])->name('users'); 

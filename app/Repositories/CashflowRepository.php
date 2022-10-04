@@ -14,7 +14,7 @@ class CashflowRepository implements BaseRepository{
     }
 
     public function all(){
-        return $this->cashflow->all();
+        return $this->cashflow->orderBy('created_at', 'desc')->sortable()->paginate(10);
     }
     
     public function create($attributes){
@@ -23,6 +23,15 @@ class CashflowRepository implements BaseRepository{
     
     public function find($id){
         return $this->cashflow->findOrFail($id);
+    }
+    
+    public function findByCode($code){
+        return $this->cashflow->where('code', 'like', '%' . $code . '%')->sortable()->paginate(10);
+    }
+
+    public function findByDate($attributes)
+    {
+        return $this->cashflow->whereBetween('created_at', [$attributes['from'], $attributes['to']])->sortable()->paginate(10);
     }
     
     public function update($id, $attributes){

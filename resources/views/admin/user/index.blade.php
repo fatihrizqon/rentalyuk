@@ -24,6 +24,7 @@
                             <th class="text-center">Total Bookings</th>
                             <th class="text-center">Created At</th>
                             <th class="text-center">Updated At</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,25 @@
                             <td class="text-center">{{ $user->bookings_count }}</td>
                             <td class="text-center">{{ $user->created_at }}</td>
                             <td class="text-center">{{ $user->updated_at }}</td>
+                            <td>
+                                @if(!$user->admin)
+                                <form class="grid w-full gap-y-4 titillium-web" action="{{ route('admin.create') }}"
+                                    method="POST">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                    <button type="submit" class="border">Make Admin</button>
+                                </form>
+                                @else
+                                @if($user->username != 'admin')
+                                <form class="grid w-full gap-y-4 titillium-web" action="{{ route('admin.delete') }}"
+                                    method="POST">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                    <button type="submit" class="border">Demote</button>
+                                </form>
+                                @endif
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

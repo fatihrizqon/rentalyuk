@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Admin;
 use App\Models\Booking;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Notifications\Notifiable;
@@ -32,9 +34,27 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            $user->name = Str::title($user->name);
+            $user->username = Str::lower($user->username);
+        });
+    }
 
     public function bookings()
     { 
       return $this->hasMany(Booking::class);
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'id');
     }
 }

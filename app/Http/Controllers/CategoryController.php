@@ -9,46 +9,51 @@ use Illuminate\Http\Request;
 use App\Exports\CategoriesExport;
 use App\Services\CategoryService;
 use Maatwebsite\Excel\Facades\Excel;
+use Intervention\Image\Facades\Image;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request)
-    {
-        $keywords = $request->keywords;
-        if($keywords){
-            $categories = Category::where('name', 'like', '%' . $keywords . '%')->withCount('vehicles')->sortable()->paginate(10);           
-        }else{
-            $categories = Category::withCount(['vehicles', 'bookings'])->sortable()->paginate(10);
-        }
-
-        return view('admin.category.index', [
-            'categories'=> $categories,
-            'keywords'  => $keywords
-        ]);
+    private $service;
+    public function __construct(CategoryService $service) {
+        $this->service = $service;
     }
 
-    public function store(Request $request)
+    public function index()
     {
-        $attributes = $request->validate([
-            'name'  => ['required', 'min:3'],
-            'image' => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
-        ]);
- 
-        if($request->file('image')){
-            $path = Storage::disk('do')->putFile('images', $request->file('image'), 'public');
-            $attributes['image'] = $path;
+        try {
+            return view('admin.category.index', [
+                'categories'=> $this->service->all()
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
         }
+    }
 
-        try{
-            $category = Category::create($attributes);
-            if($category){ 
-                return redirect('admin/categories')->with('status', 'a new category has been created.');
-            }else{
-                return redirect('admin/categories')->with('warning', 'failed to create new category, please try again.');
+    public function store(CategoryRequest $request)
+    {
+        try {
+            if($request->hasFile('image')){
+                $image = Image::make($request->file('image'))->stream('webp', 100);
+                $path = 'images/'.pathinfo($request->file('image')->hashName('images'), PATHINFO_FILENAME).'.'.'webp';
+                Storage::disk('do')->put($path, $image, 'public');
             }
-        }catch(\Exception $e){
-            return response()->json(['success' => false,'message' => $e], 403);
+
+            $attributes = [
+                'name' => $request->name,
+                'image' => $request->file('image') ? $path : ''
+            ];
+            $this->service->create($attributes);
+            return redirect('admin/categories')->with('status', 'a new category has been created.');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
         }
     }
 
@@ -59,32 +64,30 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update($id, CategoryRequest $request)
     {
-        $attributes = $request->validate([
-            'name'  => ['required', 'min:3'],
-            'image' => ['file', 'mimes:svg,png,jpg,gif,avif', 'max:4096'],
-        ]);
- 
-        if($request->file('image')){
-            $path = Storage::disk('do')->putFile('images', $request->file('image'), 'public');
-            $attributes['image'] = $path;
-        }
-
-        $category = Category::find($id);
-        try{
-            $category = $category->update($attributes); 
-            if($category){ 
-                return redirect('admin/categories')->with('status', 'Selected category has been updated.');
-            }else{
-                return redirect('admin/categories')->with('warning', 'Failed to update selected category, please try again.');
+        try {
+            if($request->hasFile('image')){
+                $image = Image::make($request->file('image'))->stream('webp', 100);
+                $path = 'images/'.pathinfo($request->file('image')->hashName('images'), PATHINFO_FILENAME).'.'.'webp';
+                Storage::disk('do')->put($path, $image, 'public');
             }
-        }catch(\Exception $e){
-            return response()->json(['success' => false,'message' => $e], 403);
+
+            $attributes = [
+                'name' => $request->name,
+                'image' => $request->file('image') ? $path : ''
+            ];
+            $this->service->update($id, $attributes);
+            return redirect('admin/categories')->with('status', 'selected category has been updated.');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
         }
     }
 
-    public function export(Request $request, Excel $excel)
+    public function export(Excel $excel)
     { 
         $filename = 'Category Data Export '.Carbon::now()->format('Y-m-d H:i:s').'.xlsx';
         return $excel::download(new CategoriesExport(), $filename);
@@ -92,11 +95,14 @@ class CategoryController extends Controller
 
     public function destroy(Request $request)
     {
-        $category = Category::find($request->category_id)->delete();
-        if($category){ 
-            return redirect('admin/categories')->with('status', 'Selected category has been deleted.');
-        }else{
-            return redirect('admin/categories')->with('warning', 'Failed to delete selected category, please try again.');
-        } 
+        try {
+            $this->service->delete($request->category_id);
+            return redirect('admin/categories')->with('status', 'selected category has been deleted.');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }

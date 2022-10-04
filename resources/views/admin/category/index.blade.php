@@ -16,8 +16,7 @@
                 </div>
                 <div>
                     <a class="btn text-success flex items-center justify-center"
-                        href="{{ route('categories.export', ['keywords' => $keywords]) }}"><i
-                            class='bx bx-spreadsheet bx-sm'></i></a>
+                        href="{{ route('categories.export') }}"><i class='bx bx-spreadsheet bx-sm'></i></a>
                 </div>
             </div>
             <div x-show="open" x-transition>
@@ -110,6 +109,7 @@
                         class="btn border-2 border-danger text-danger">Cancel</button>
                     <form action="{{ route('categories.delete') }}" method="POST">
                         @csrf
+                        @method('DELETE')
                         <input type="hidden" name="category_id" :value="category_id">
                         <button type="submit" class="btn border-2 border-primary text-primary">Yes</button>
                     </form>
